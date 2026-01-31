@@ -34,6 +34,7 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding-bottom: 120px;
+            transition: background-image 3s ease, background-color 3s ease;
         }
 
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -410,6 +411,40 @@
                 alert("Link copiado para a área de transferência!");
             }
         }
+    </script>
+    <script>
+        // ... (seu script de navegação showPage já existente) ...
+
+        function updateAtmosphere() {
+            const now = new Date();
+            const hour = now.getHours(); // Pega a hora atual (0 a 23)
+            const root = document.documentElement;
+
+            // CONFIGURAÇÃO DOS TEMAS
+            // 1. SUNSET (16:00 às 18:00) - Golden Hour
+            if (hour >= 16 && hour < 18) {
+                root.style.setProperty('--night', '#2c1205');        // Marrom Café
+                root.style.setProperty('--dark-purple', '#9e3d28'); // Terracota
+                root.style.setProperty('--accent', '#ffb347');      // Laranja Dourado
+                console.log("Modo: Sunset 🌅");
+            } 
+            // 2. BLUE HOUR / TWILIGHT (18:00 às 19:00) - Transição
+            else if (hour >= 18 && hour < 19) {
+                root.style.setProperty('--night', '#0f0c29');       // Azul Profundo
+                root.style.setProperty('--dark-purple', '#302b63'); // Roxo Azulado
+                root.style.setProperty('--accent', '#ff4b1f');      // Laranja Neon avermelhado
+                console.log("Modo: Twilight 🌆");
+            } 
+            // 3. NIGHT (Resto do tempo) - O padrão do seu CSS original
+            else {
+                // Mantém as cores originais do CSS (Dark Purple/Black)
+                // Não precisa setar nada, o CSS assume.
+                console.log("Modo: Night Party 🌙");
+            }
+        }
+
+        // Roda a função assim que carrega
+        updateAtmosphere();
     </script>
 </body>
 </html>
