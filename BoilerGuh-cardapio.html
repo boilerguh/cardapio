@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boiler Guh | Menu Sunset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CONFIGURAÇÕES VISUAIS --- */
+        :root {
+            --accent: #FF8C42; /* Laranja Pôr do Sol */
+            --dark-purple: #2D1B33;
+            --night: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --sunset-glow: 0 0 20px rgba(255, 140, 66, 0.3);
+        }
+
+        body {
+            background-color: var(--night);
+            background-image: linear-gradient(180deg, var(--night) 0%, var(--dark-purple) 70%, var(--accent) 150%);
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding-bottom: 120px;
+        }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        /* HEADER COM LOGO CIRCULAR (ESTILO FIGURINHA) */
+        header { text-align: center; padding: 50px 0; position: relative; }
+        
+        .logo-circle {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: var(--sunset-glow);
+            margin-bottom: 10px;
+            background: #000; /* Fundo preto para garantir contraste se o png for transparente */
+        }
+
+        .tagline {
+            font-size: 0.6rem; 
+            letter-spacing: 4px; 
+            opacity: 0.6; 
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Navegação Inferior */
+        .nav-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            display: flex;
+            padding: 6px;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-btn.active { background: var(--accent); color: #000; }
+
+        /* Conteúdo */
+        .page { display: none; animation: slideUp 0.4s ease; }
+        .page.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { 
+            text-transform: uppercase; 
+            font-size: 0.8rem; 
+            letter-spacing: 4px; 
+            color: var(--accent);
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        h2::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin-left: 15px; }
+
+        .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .drink-card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; }
+        .image-container { width: 100%; height: 180px; background: #000; }
+        .drink-image { width: 100%; height: 100%; object-fit: cover; } 
+        .drink-info { padding: 15px; }
+        .price-tag { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #000; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; z-index: 2; }
+
+        .menu-group { background: var(--glass); border-radius: 20px; padding: 10px 20px; margin-bottom: 20px; border: 1px solid var(--border); }
+        .menu-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .menu-item:last-child { border: none; }
+        .item-name { font-size: 0.9rem; opacity: 0.9; max-width: 75%; }
+        .item-price { color: var(--accent); font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
+        .item-desc { font-size: 0.75rem; opacity: 0.5; display: block; margin-top: 2px; }
+
+        @media (max-width: 500px) { .featured-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="Boilerguh-logo-white.webp" alt="Boiler Guh Logo" class="logo-circle">
+            <p class="tagline">SUNSET AFTER PARTY</p>
+        </header>
+
+        <main id="signature" class="page active">
+            <h2>Signature Drinks</h2>
+            <div class="featured-grid">
+                <div class="drink-card">
+                    <span class="price-tag">R$ 30,00</span>
+                    <div class="image-container">
+                        <img src="https://minhasreceitinhas.com.br/wp-content/uploads/2017/06/1207_Marguerita_Cla%CC%81ssica-730x365.jpeg" alt="Marguerita" class="drink-image">
+                    </div>
+                    <div class="drink-info">
+                        <strong style="display:block">Margarita</strong>
+                        <small style="opacity:0.5">Tequila, Limão e Sal</small>
+                    </div>
+                </div>
+                <div class="drink-card">
+                    <span class="price-tag">R$ 35,00</span>
+                    <div class="image-container">
+                        <img src="https://ruca.es/wp-content/uploads/2024/06/03-especias-1024x1024.jpg" alt="Gin" class="drink-image">
+                    </div>
+                    <div class="drink-info">
+                        <strong style="display:block">Gin Sunset</strong>
+                        <small style="opacity:0.5">Gin, Red Bull & Especiarias</small>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Combos Favoritos</h2>
+            <div class="menu-group">
+                <div class="menu-item">
+                    <span class="item-name">Red Label + 4 Red Bull<br><small class="item-desc">+ 4 Gelos de Coco</small></span> 
+                    <span class="item-price">R$ 300,00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Absolut + 4 Red Bull</span> 
+                    <span class="item-price">R$ 250,00</span>
+                </div>
+            </div>
+        </main>
+
+        <main id="full-menu" class="page">
+            <h2>Combos</h2>
+            <div class="menu-group">
+                <div class="menu-item"><span class="item-name">Red Label + 4 Red Bull + 4 Gelos</span> <span class="item-price">R$ 300,00</span></div>
+                <div class="menu-item"><span class="item-name">Red Label + Energético 2L + 4 Gelos</span> <span class="item-price">R$ 230,00</span></div>
+                <div class="menu-item"><span class="item-name">Gin (Bombay/Tanq) + 4 Red Bull</span> <span class="item-price">R$ 250,00</span></div>
+                <div class="menu-item"><span class="item-name">Gin (Bombay/Tanq) + Bally 2L</span> <span class="item-price">R$ 200,00</span></div>
+                <div class="menu-item"><span class="item-name">Absolut + 4 Red Bull</span> <span class="item-price">R$ 250,00</span></div>
+                <div class="menu-item"><span class="item-name">Absolut + Energético 2L</span> <span class="item-price">R$ 180,00</span></div>
+            </div>
+
+            <h2>Bebidas & Drinks</h2>
+            <div class="menu-group">
+                <div class="menu-item"><span class="item-name">Gin Tanqueray ou Bombay + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
+                <div class="menu-item"><span class="item-name">Gin Tanqueray + Bally Tropical</span> <span class="item-price">R$ 35,00</span></div>
+                <div class="menu-item"><span class="item-name">Copão Red Label + Red Bull + Gelo Coco</span> <span class="item-price">R$ 40,00</span></div>
+                <div class="menu-item"><span class="item-name">Copão Red Label + Fly Horse + Gelo Coco</span> <span class="item-price">R$ 35,00</span></div>
+                <div class="menu-item"><span class="item-name">Copão Absolut + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
+                <div class="menu-item"><span class="item-name">Copão Absolut + Fly Horse</span> <span class="item-price">R$ 35,00</span></div>
+                <div class="menu-item"><span class="item-name">Jägermeister + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
+                <div class="menu-item"><span class="item-name">Margarita</span> <span class="item-price">R$ 30,00</span></div>
+                <div class="menu-item"><span class="item-name">Dose Licor 43</span> <span class="item-price">R$ 30,00</span></div>
+                <div class="menu-item"><span class="item-name">Dose Red Label</span> <span class="item-price">R$ 26,00</span></div>
+                <div class="menu-item"><span class="item-name">Shot Tequila</span> <span class="item-price">R$ 20,00</span></div>
+                <div class="menu-item"><span class="item-name">Taça Champanhe</span> <span class="item-price">R$ 20,00</span></div>
+                <div class="menu-item"><span class="item-name">Champanhe Salton (Garrafa)</span> <span class="item-price">R$ 90,00</span></div>
+            </div>
+
+            <h2>Cervejas, Energéticos e Softs</h2>
+            <div class="menu-group">
+                <div class="menu-item"><span class="item-name">Red Bull / Monster (Sabores)</span> <span class="item-price">R$ 18,00</span></div>
+                <div class="menu-item"><span class="item-name">Energético 2L (Bally / Fly Horse)</span> <span class="item-price">R$ 18,00</span></div>
+                <div class="menu-item"><span class="item-name">Heineken 269ml</span> <span class="item-price">R$ 7,00</span></div>
+                <div class="menu-item"><span class="item-name">Original 269ml</span> <span class="item-price">R$ 7,00</span></div>
+                <div class="menu-item"><span class="item-name">Refrigerante Lata (Coca/Guaraná/Sprite)</span> <span class="item-price">R$ 6,00</span></div>
+                <div class="menu-item"><span class="item-name">Suco de Laranja (Copo / 1L)</span> <span class="item-price">R$ 12 / 25</span></div>
+                <div class="menu-item"><span class="item-name">Água (c/ ou s/ Gás)</span> <span class="item-price">R$ 5,00</span></div>
+                <div class="menu-item"><span class="item-name" style="color:var(--accent)">Extra: Gelo de Coco</span> <span class="item-price">R$ 6,00</span></div>
+            </div>
+
+            <h2>Porções</h2>
+            <div class="menu-group">
+                <div class="menu-item"><span class="item-name">Meia Batata + Meia Calabresa</span> <span class="item-price">R$ 35,00</span></div>
+                <div class="menu-item"><span class="item-name">Meia Batata + Meios Nuggets (6un)</span> <span class="item-price">R$ 25,00</span></div>
+                <div class="menu-item"><span class="item-name">Calabresa Acebolada</span> <span class="item-price">R$ 25,00</span></div>
+                <div class="menu-item"><span class="item-name">Mini Pastel (Carne/Queijo/Misto)</span> <span class="item-price">R$ 25,00</span></div>
+                <div class="menu-item"><span class="item-name">Batata Frita</span> <span class="item-price">R$ 20,00</span></div>
+                <div class="menu-item"><span class="item-name">Nuggets (10 un)</span> <span class="item-price">R$ 20,00</span></div>
+            </div>
+
+            <h2>Snacks & Doces</h2>
+            <div class="menu-group">
+                <div class="menu-item"><span class="item-name">Doritos Dinamita</span> <span class="item-price">R$ 7,00</span></div>
+                <div class="menu-item"><span class="item-name">Cebolitos</span> <span class="item-price">R$ 6,50</span></div>
+                <div class="menu-item"><span class="item-name">Doritos / Ruffles / Cheetos</span> <span class="item-price">R$ 6,00</span></div>
+                <div class="menu-item"><span class="item-name">Fandangos</span> <span class="item-price">R$ 5,00</span></div>
+                <div class="menu-item"><span class="item-name">Mentos</span> <span class="item-price">R$ 4,00</span></div>
+                <div class="menu-item"><span class="item-name">Halls</span> <span class="item-price">R$ 3,00</span></div>
+                <div class="menu-item"><span class="item-name">Pirulito</span> <span class="item-price">R$ 0,50</span></div>
+            </div>
+        </main>
+
+        <footer style="text-align: center; margin-top: 40px; opacity: 0.3; font-size: 0.7rem;">
+            BOILER GUH © 2026
+        </footer>
+    </div>
+
+    <nav class="nav-bar">
+        <button class="nav-btn active" onclick="showPage('signature', this)">Destaques</button>
+        <button class="nav-btn" onclick="showPage('full-menu', this)">Completo</button>
+    </nav>
+
+    <script>
+        function showPage(id, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
