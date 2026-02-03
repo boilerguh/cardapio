@@ -8,7 +8,6 @@
     <meta name="description" content="O BOILERGUH é uma sunset organizada pelo DJ Gugu. Música eletrônica, drinks e bons momentos. Rua dois, 842 - Itaguaçú.">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-    
     <link rel="icon" type="image/webp" href="Boilerguh-logo-white.webp">
 
     <meta property="og:title" content="Boiler Guh | Sunset After Party 🍹">
@@ -36,7 +35,7 @@
             --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.1);
             --sunset-glow: 0 0 20px rgba(255, 140, 66, 0.3);
-            --danger: #ff4757; /* Cor para avisos de proibição */
+            --danger: #ff4757;
         }
 
         body {
@@ -87,7 +86,7 @@
 
         .nav-btn.active { background: var(--accent); color: #000; }
 
-        /* GERAL PÁGINAS */
+        /* PÁGINAS */
         .page { display: none; animation: slideUp 0.4s ease; }
         .page.active { display: block; }
 
@@ -102,7 +101,61 @@
         }
         h2::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin-left: 15px; }
 
-        /* MENU ITENS */
+        /* --- VISUAL DE LISTA (ESTILO ANTIGO + CLIQUE) --- */
+        
+        /* Container Glass Unificado */
+        .menu-group { 
+            background: var(--glass); 
+            border-radius: 20px; 
+            margin-bottom: 25px; 
+            border: 1px solid var(--border);
+            overflow: hidden; 
+        }
+
+        /* Item da Lista */
+        .menu-item-toggle {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; 
+            background: transparent;
+            border-bottom: 1px solid rgba(255,255,255,0.05); /* Linha divisória fina */
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .menu-item-toggle:last-child { border-bottom: none; }
+        .menu-item-toggle:hover { background: rgba(255, 255, 255, 0.05); }
+        
+        /* Item Aberto */
+        .menu-item-toggle.active {
+            background: rgba(255, 140, 66, 0.15);
+            border-bottom: none; 
+        }
+        .menu-item-toggle.active .item-name { color: var(--accent); font-weight: 700; }
+
+        .item-name { font-size: 0.9rem; opacity: 0.9; max-width: 70%; font-weight: 400; transition: 0.3s; }
+        .item-price { color: var(--accent); font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
+        .item-desc { font-size: 0.75rem; opacity: 0.5; display: block; margin-top: 2px; font-weight: 400; color: #fff;}
+
+        /* Gaveta de Foto (Escondida) */
+        .item-details {
+            display: none; 
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .item-details img {
+            width: 100%; height: 200px; object-fit: cover;
+            border-radius: 10px; margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .item-details p { font-size: 0.85rem; color: #ddd; line-height: 1.5; margin: 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* DESTAQUES */
         .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .drink-card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; }
         .image-container { width: 100%; height: 180px; background: #000; }
@@ -110,142 +163,39 @@
         .drink-info { padding: 15px; }
         .price-tag { position: absolute; top: 10px; right: 10px; background: var(--accent); color: #000; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; z-index: 2; }
 
-        .menu-group { background: var(--glass); border-radius: 20px; padding: 10px 20px; margin-bottom: 20px; border: 1px solid var(--border); }
-        .menu-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .menu-item:last-child { border: none; }
-        .item-name { font-size: 0.9rem; opacity: 0.9; max-width: 75%; }
-        .item-price { color: var(--accent); font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
-        .item-desc { font-size: 0.75rem; opacity: 0.5; display: block; margin-top: 2px; }
-
-        /* --- ABA SOBRE --- */
-        .about-hero {
-            width: 100%; height: 200px; object-fit: cover;
-            border-radius: 20px; border: 1px solid var(--border);
-            margin-bottom: 20px; filter: brightness(0.8);
-        }
-        .about-text {
-            background: var(--glass); padding: 25px; border-radius: 20px;
-            border: 1px solid var(--border); line-height: 1.6;
-            color: #eee; font-size: 0.9rem; margin-bottom: 20px;
-        }
-        .about-text p { margin-bottom: 15px; }
-        
-        /* CARD DE AVISO (Regras) */
-        .warning-card {
-            background: rgba(255, 71, 87, 0.1); border: 1px solid var(--danger);
-            border-radius: 15px; padding: 20px; margin-top: 20px;
-        }
-        .warning-title { color: var(--danger); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 10px; display: block; }
+        /* ABA SOBRE */
+        .about-hero { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 20px; filter: brightness(0.8); }
+        .about-text { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--border); line-height: 1.6; color: #eee; font-size: 0.9rem; margin-bottom: 20px; }
+        .warning-card { background: rgba(255, 71, 87, 0.1); border: 1px solid var(--danger); border-radius: 15px; padding: 20px; margin-top: 20px; }
         .info-list { list-style: none; padding: 0; margin: 0; }
         .info-list li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
-        .info-list li:last-child { border: none; }
-        .info-list strong { color: var(--accent); }
 
-        /* --- ABA CONTATO --- */
+        /* FAQ */
+        .faq-container { margin-top: 30px; }
+        details { background: var(--glass); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 10px; overflow: hidden; transition: 0.3s; }
+        details[open] { border-color: var(--accent); background: rgba(255, 255, 255, 0.08); }
+        summary { padding: 18px; cursor: pointer; font-weight: 700; font-size: 0.9rem; list-style: none; display: flex; justify-content: space-between; align-items: center; color: #fff; }
+        summary::after { content: '+'; color: var(--accent); font-size: 1.5rem; font-weight: 300; line-height: 0; transition: 0.3s; }
+        details[open] summary::after { content: '-'; transform: rotate(180deg); }
+        .faq-answer { padding: 0 18px 18px 18px; font-size: 0.85rem; line-height: 1.6; color: #ddd; opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.05); margin-top: -5px; padding-top: 15px; }
+
+        /* CONTATO */
         .contact-container { text-align: center; padding: 10px; }
         .maps-row { display: flex; gap: 10px; width: 100%; margin-bottom: 15px; }
-        
-        .contact-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; padding: 16px; border-radius: 15px; text-decoration: none;
-            font-weight: 700; text-transform: uppercase; font-size: 0.85rem;
-            transition: 0.3s; border: 1px solid var(--border);
-            box-sizing: border-box; color: #fff; cursor: pointer;
-        }
-        
+        .contact-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; border-radius: 15px; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; transition: 0.3s; border: 1px solid var(--border); box-sizing: border-box; color: #fff; cursor: pointer; }
         .btn-whatsapp { background: #25D366; border: none; margin-bottom: 15px; font-size: 0.8rem; }
         .btn-maps { background: var(--glass); flex: 1; }
+        .address-text { font-size: 0.9rem; opacity: 0.9; margin-bottom: 25px; margin-top: 5px; line-height: 1.5; color: #fff; background: var(--glass); padding: 15px; border-radius: 10px; }
+        .thanks-box { margin-top: 40px; padding: 25px; background: var(--glass); border-radius: 20px; border: 1px dashed var(--accent); text-align: left; }
+        .action-link { display: flex; align-items: center; gap: 15px; color: #fff; text-decoration: none; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         
-        .address-text {
-            font-size: 0.9rem; opacity: 0.9; margin-bottom: 25px;
-            margin-top: 5px; line-height: 1.5; color: #fff;
-            background: var(--glass); padding: 15px; border-radius: 10px;
-        }
-
-        /* --- ÁREA DE ENGAJAMENTO --- */
-        .thanks-box {
-            margin-top: 40px; padding: 25px;
-            background: var(--glass); border-radius: 20px;
-            border: 1px dashed var(--accent);
-            text-align: left;
-        }
-        .thanks-box h3 { color: var(--accent); margin-top: 0; font-size: 1rem; margin-bottom: 20px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
-        
-        .action-link {
-            display: flex; align-items: center; gap: 15px;
-            color: #fff; text-decoration: none; padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-        }
-        .action-link:last-child { border-bottom: none; }
-        .action-link:active { opacity: 0.6; }
-        .action-icon { width: 24px; text-align: center; font-size: 1.2rem; }
-        .arrow { margin-left: auto; opacity: 0.5; }
-
-        /* --- FOOTER SOCIAL --- */
+        /* FOOTER */
         footer { text-align: center; margin-top: 50px; opacity: 0.8; font-size: 0.7rem; color: #aaa; }
-        .social-row {
-            display: flex; justify-content: center; gap: 20px;
-            margin-top: 15px; margin-bottom: 30px;
-        }
+        .social-row { display: flex; justify-content: center; gap: 20px; margin-top: 15px; margin-bottom: 30px; }
         .social-icon { color: #fff; width: 24px; height: 24px; opacity: 0.6; transition: 0.3s; }
         .social-icon:hover { opacity: 1; color: var(--accent); transform: scale(1.1); }
 
         @media (max-width: 500px) { .featured-grid { grid-template-columns: 1fr; } }
-
-        /* --- ESTILOS DO FAQ (ACORDEÃO) --- */
-        .faq-container { margin-top: 30px; }
-        
-        details {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-
-        details[open] {
-            border-color: var(--accent); /* Borda laranja quando aberto */
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        summary {
-            padding: 18px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.9rem;
-            list-style: none; /* Remove a seta padrão feia */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #fff;
-        }
-
-        /* Ícone personalizado (+ e -) */
-        summary::after {
-            content: '+';
-            color: var(--accent);
-            font-size: 1.5rem;
-            font-weight: 300;
-            line-height: 0;
-            transition: 0.3s;
-        }
-
-        details[open] summary::after {
-            content: '-';
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 18px 18px 18px;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #ddd;
-            opacity: 0.9;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: -5px; /* Ajuste visual */
-            padding-top: 15px;
-        }
     </style>
 </head>
 <body>
@@ -259,20 +209,22 @@
         <main id="signature" class="page active">
             <h2>Signature Drinks</h2>
             <div class="featured-grid">
+                
                 <div class="drink-card">
                     <span class="price-tag">R$ 30,00</span>
                     <div class="image-container">
-                        <img src="https://minhasreceitinhas.com.br/wp-content/uploads/2017/06/1207_Marguerita_Cla%CC%81ssica-730x365.jpeg" alt="Marguerita" class="drink-image">
+                        <img src="https://images.unsplash.com/photo-1542849187-5ec6ea5e6a27?auto=format&fit=crop&w=800&q=80" alt="Margarita" class="drink-image">
                     </div>
                     <div class="drink-info">
                         <strong style="display:block">Margarita</strong>
                         <small style="opacity:0.5">Tequila, Limão e Sal</small>
                     </div>
                 </div>
+
                 <div class="drink-card">
                     <span class="price-tag">R$ 35,00</span>
                     <div class="image-container">
-                        <img src="https://ruca.es/wp-content/uploads/2024/06/03-especias-1024x1024.jpg" alt="Gin" class="drink-image">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80" alt="Gin Sunset" class="drink-image">
                     </div>
                     <div class="drink-info">
                         <strong style="display:block">Gin Sunset</strong>
@@ -283,76 +235,361 @@
 
             <h2>Combos Favoritos</h2>
             <div class="menu-group">
-                <div class="menu-item">
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
                     <span class="item-name">Red Label + 4 Red Bull<br><small class="item-desc">+ 4 Gelos de Coco</small></span> 
                     <span class="item-price">R$ 300,00</span>
                 </div>
-                <div class="menu-item">
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=FOTO+DO+COMBO" alt="Foto">
+                    <p>O combo favorito da casa. Whisky Red Label autêntico, acompanhado de 4 Red Bulls gelados e nossos famosos gelos de água de coco.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
                     <span class="item-name">Absolut + 4 Red Bull</span> 
                     <span class="item-price">R$ 250,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=FOTO+DO+COMBO" alt="Foto">
+                    <p>Vodka Absolut de primeira linha com a energia do Red Bull.</p>
                 </div>
             </div>
         </main>
 
         <main id="full-menu" class="page">
+            
             <h2>Combos</h2>
             <div class="menu-group">
-                <div class="menu-item"><span class="item-name">Red Label + 4 Red Bull + 4 Gelos</span> <span class="item-price">R$ 300,00</span></div>
-                <div class="menu-item"><span class="item-name">Red Label + Energético 2L + 4 Gelos</span> <span class="item-price">R$ 230,00</span></div>
-                <div class="menu-item"><span class="item-name">Gin (Bombay/Tanq) + 4 Red Bull</span> <span class="item-price">R$ 250,00</span></div>
-                <div class="menu-item"><span class="item-name">Gin (Bombay/Tanq) + Bally 2L</span> <span class="item-price">R$ 200,00</span></div>
-                <div class="menu-item"><span class="item-name">Absolut + 4 Red Bull</span> <span class="item-price">R$ 250,00</span></div>
-                <div class="menu-item"><span class="item-name">Absolut + Energético 2L</span> <span class="item-price">R$ 180,00</span></div>
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Red Label + 4 Red Bull + 4 Gelos</span> <span class="item-price">R$ 300,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Red+Label+Combo" alt="Red Label">
+                    <p>Garrafa de Red Label + 4 latas de Red Bull + 4 Gelos de Coco.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Red Label + Energético 2L + 4 Gelos</span> <span class="item-price">R$ 230,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Red+Label+Bally" alt="Red Label Bally">
+                    <p>Opção econômica: Garrafa Red Label + Energético 2L + 4 Gelos de Coco.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Gin (Bombay/Tanq) + 4 Red Bull</span> <span class="item-price">R$ 250,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Combo+Gin" alt="Gin">
+                    <p>Escolha entre Tanqueray ou Bombay. Acompanha 4 Red Bulls.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Gin (Bombay/Tanq) + Bally 2L</span> <span class="item-price">R$ 200,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Gin+Bally" alt="Gin Bally">
+                    <p>Escolha entre Tanqueray ou Bombay. Acompanha Energético 2L.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Absolut + 4 Red Bull</span> <span class="item-price">R$ 250,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Absolut+RedBull" alt="Absolut">
+                    <p>Vodka Absolut Original + 4 Red Bulls.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Absolut + Energético 2L</span> <span class="item-price">R$ 180,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Absolut+Bally" alt="Absolut">
+                    <p>Vodka Absolut Original + Energético 2L.</p>
+                </div>
             </div>
 
             <h2>Bebidas & Drinks</h2>
             <div class="menu-group">
-                <div class="menu-item"><span class="item-name">Gin Tanqueray ou Bombay + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
-                <div class="menu-item"><span class="item-name">Gin Tanqueray + Bally Tropical</span> <span class="item-price">R$ 35,00</span></div>
-                <div class="menu-item"><span class="item-name">Copão Red Label + Red Bull + Gelo Coco</span> <span class="item-price">R$ 40,00</span></div>
-                <div class="menu-item"><span class="item-name">Copão Red Label + Fly Horse + Gelo Coco</span> <span class="item-price">R$ 35,00</span></div>
-                <div class="menu-item"><span class="item-name">Copão Absolut + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
-                <div class="menu-item"><span class="item-name">Copão Absolut + Fly Horse</span> <span class="item-price">R$ 35,00</span></div>
-                <div class="menu-item"><span class="item-name">Jägermeister + Red Bull</span> <span class="item-price">R$ 40,00</span></div>
-                <div class="menu-item"><span class="item-name">Margarita</span> <span class="item-price">R$ 30,00</span></div>
-                <div class="menu-item"><span class="item-name">Dose Licor 43</span> <span class="item-price">R$ 30,00</span></div>
-                <div class="menu-item"><span class="item-name">Dose Red Label</span> <span class="item-price">R$ 26,00</span></div>
-                <div class="menu-item"><span class="item-name">Shot Tequila</span> <span class="item-price">R$ 20,00</span></div>
-                <div class="menu-item"><span class="item-name">Taça Champanhe</span> <span class="item-price">R$ 20,00</span></div>
-                <div class="menu-item"><span class="item-name">Champanhe Salton (Garrafa)</span> <span class="item-price">R$ 90,00</span></div>
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Gin Tanqueray ou Bombay + Red Bull</span> <span class="item-price">R$ 40,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" alt="Gin">
+                    <p>Taça de Gin tônica preparada com especiarias e Red Bull.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Gin Tanqueray + Bally Tropical</span> <span class="item-price">R$ 35,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Gin+Tropical" alt="Gin">
+                    <p>Taça de Gin com Energético Tropical.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Copão Red Label + Red Bull + Gelo Coco</span> <span class="item-price">R$ 40,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&q=80" alt="Copão">
+                    <p>O tradicional copão de 700ml montado na hora.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Copão Red Label + Fly Horse + Gelo Coco</span> <span class="item-price">R$ 35,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Copao" alt="Copão">
+                    <p>Copão montado com energético de garrafa.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Copão Absolut + Red Bull</span> <span class="item-price">R$ 40,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Copao+Absolut" alt="Copão">
+                    <p>Copão de Vodka Absolut com Red Bull.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Copão Absolut + Fly Horse</span> <span class="item-price">R$ 35,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Copao+Absolut" alt="Copão">
+                    <p>Copão de Vodka Absolut com Fly Horse.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Jägermeister + Red Bull</span> <span class="item-price">R$ 40,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Jager" alt="Jager">
+                    <p>Dose dupla de Jäger com Red Bull (JägerBomb).</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Margarita</span> <span class="item-price">R$ 30,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://images.unsplash.com/photo-1542849187-5ec6ea5e6a27?auto=format&fit=crop&w=800&q=80" alt="Margarita">
+                    <p>Clássica: Tequila, Licor de Laranja, Limão e borda de sal.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Dose Licor 43</span> <span class="item-price">R$ 30,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Licor+43" alt="Licor 43">
+                    <p>Dose pura de Licor 43.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Dose Red Label</span> <span class="item-price">R$ 26,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Dose+Red" alt="Dose Red">
+                    <p>Dose pura de Whisky.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Shot Tequila</span> <span class="item-price">R$ 20,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Shot+Tequila" alt="Shot">
+                    <p>Dose de Tequila José Cuervo com limão e sal.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Taça Champanhe</span> <span class="item-price">R$ 20,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Taca+Champanhe" alt="Champanhe">
+                    <p>Taça individual.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Champanhe Salton (Garrafa)</span> <span class="item-price">R$ 90,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Garrafa+Salton" alt="Salton">
+                    <p>Garrafa fechada de Espumante Salton.</p>
+                </div>
             </div>
 
-            <h2>Cervejas, Energéticos e Softs</h2>
+            <h2>Cervejas & Softs</h2>
             <div class="menu-group">
-                <div class="menu-item"><span class="item-name">Red Bull / Monster (Sabores)</span> <span class="item-price">R$ 18,00</span></div>
-                <div class="menu-item"><span class="item-name">Energético 2L (Bally / Fly Horse)</span> <span class="item-price">R$ 18,00</span></div>
-                <div class="menu-item"><span class="item-name">Heineken 269ml</span> <span class="item-price">R$ 7,00</span></div>
-                <div class="menu-item"><span class="item-name">Original 269ml</span> <span class="item-price">R$ 7,00</span></div>
-                <div class="menu-item"><span class="item-name">Refrigerante Lata (Coca/Guaraná/Sprite)</span> <span class="item-price">R$ 6,50</span></div>
-                <div class="menu-item"><span class="item-name">Suco de Laranja (Copo / 1L)</span> <span class="item-price">R$ 12 / 25</span></div>
-                <div class="menu-item"><span class="item-name">Água (c/ ou s/ Gás)</span> <span class="item-price">R$ 5,00</span></div>
-                <div class="menu-item"><span class="item-name" style="color:var(--accent)">Extra: Gelo de Coco</span> <span class="item-price">R$ 6,00</span></div>
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Red Bull / Monster (Sabores)</span> <span class="item-price">R$ 18,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Energeticos" alt="Red Bull">
+                    <p>Consulte sabores disponíveis no bar (Tradicional, Tropical, Melancia, etc).</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Energético 2L (Bally / Fly Horse)</span> <span class="item-price">R$ 18,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Energetico+2L" alt="Energetico">
+                    <p>Garrafa de 2 Litros.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Heineken 269ml</span> <span class="item-price">R$ 7,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Heineken" alt="Cerveja">
+                    <p>Lata 269ml estupidamente gelada.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Original 269ml</span> <span class="item-price">R$ 7,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Original" alt="Cerveja">
+                    <p>Lata 269ml.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Refrigerante Lata</span> <span class="item-price">R$ 6,50</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Refri" alt="Refri">
+                    <p>Coca-Cola, Guaraná ou Sprite.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Suco de Laranja (Copo / 1L)</span> <span class="item-price">R$ 12 / 25</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Suco+Laranja" alt="Suco">
+                    <p>Natural.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Água (c/ ou s/ Gás)</span> <span class="item-price">R$ 5,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Agua" alt="Agua">
+                    <p>Hidrate-se!</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name" style="color:var(--accent)">Extra: Gelo de Coco</span> <span class="item-price">R$ 6,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Gelo+Coco" alt="Gelo">
+                    <p>Unidade avulsa.</p>
+                </div>
             </div>
 
             <h2>Porções</h2>
             <div class="menu-group">
-                <div class="menu-item"><span class="item-name">Meia Batata + Meia Calabresa</span> <span class="item-price">R$ 35,00</span></div>
-                <div class="menu-item"><span class="item-name">Meia Batata + 6 Nuggets</span> <span class="item-price">R$ 25,00</span></div>
-                <div class="menu-item"><span class="item-name">Calabresa Acebolada</span> <span class="item-price">R$ 25,00</span></div>
-                <div class="menu-item"><span class="item-name">Mini Pastel (Carne/Queijo/Misto)</span> <span class="item-price">R$ 25,00</span></div>
-                <div class="menu-item"><span class="item-name">Batata Frita</span> <span class="item-price">R$ 20,00</span></div>
-                <div class="menu-item"><span class="item-name">Nuggets (10 un)</span> <span class="item-price">R$ 20,00</span></div>
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Meia Batata + Meia Calabresa</span> <span class="item-price">R$ 35,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Batata+Calabresa" alt="Porção">
+                    <p>A porção perfeita para dividir. Acompanha molho da casa.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Meia Batata + 6 Nuggets</span> <span class="item-price">R$ 25,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Batata+Nuggets" alt="Porção">
+                    <p>Misto de batata frita e nuggets.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Calabresa Acebolada</span> <span class="item-price">R$ 25,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Calabresa" alt="Calabresa">
+                    <p>Porção inteira de calabresa com cebola.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Mini Pastel (Carne/Queijo/Misto)</span> <span class="item-price">R$ 25,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Pasteis" alt="Pasteis">
+                    <p>Porção de mini pastéis.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Batata Frita</span> <span class="item-price">R$ 20,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Batata" alt="Batata">
+                    <p>Porção inteira de fritas.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Nuggets (10 un)</span> <span class="item-price">R$ 20,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Nuggets" alt="Nuggets">
+                    <p>Crocantes e quentinhos.</p>
+                </div>
             </div>
 
             <h2>Snacks & Doces</h2>
             <div class="menu-group">
-                <div class="menu-item"><span class="item-name">Doritos Dinamita</span> <span class="item-price">R$ 7,00</span></div>
-                <div class="menu-item"><span class="item-name">Cebolitos</span> <span class="item-price">R$ 6,50</span></div>
-                <div class="menu-item"><span class="item-name">Doritos / Ruffles / Cheetos</span> <span class="item-price">R$ 6,00</span></div>
-                <div class="menu-item"><span class="item-name">Fandangos</span> <span class="item-price">R$ 5,00</span></div>
-                <div class="menu-item"><span class="item-name">Mentos</span> <span class="item-price">R$ 4,00</span></div>
-                <div class="menu-item"><span class="item-name">Halls</span> <span class="item-price">R$ 3,00</span></div>
-                <div class="menu-item"><span class="item-name">Pirulito</span> <span class="item-price">R$ 0,50</span></div>
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Doritos Dinamita</span> <span class="item-price">R$ 7,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Dinamita" alt="Snack">
+                    <p>Pacote individual.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Cebolitos</span> <span class="item-price">R$ 6,50</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Cebolitos" alt="Snack">
+                    <p>Pacote individual.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Doritos / Ruffles / Cheetos</span> <span class="item-price">R$ 6,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Salgadinho" alt="Snack">
+                    <p>Sabores variados.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Fandangos</span> <span class="item-price">R$ 5,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Fandangos" alt="Snack">
+                    <p>Pacote individual.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Mentos</span> <span class="item-price">R$ 4,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Mentos" alt="Doce">
+                    <p>Stick.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Halls</span> <span class="item-price">R$ 3,00</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Halls" alt="Doce">
+                    <p>Sabores variados.</p>
+                </div>
+
+                <div class="menu-item-toggle" onclick="toggleDetails(this)">
+                    <span class="item-name">Pirulito</span> <span class="item-price">R$ 0,50</span>
+                </div>
+                <div class="item-details">
+                    <img src="https://placehold.co/600x400/1a1a1a/orange?text=Pirulito" alt="Doce">
+                    <p>Unidade.</p>
+                </div>
             </div>
         </main>
 
@@ -376,7 +613,7 @@
                 </ul>
             </div>
 
-<div class="warning-card" style="border-left: 4px solid var(--danger); text-align: left;">
+            <div class="warning-card" style="border-left: 4px solid var(--danger); text-align: left;">
                 <span class="warning-title" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
                     <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
                     TOLERÂNCIA ZERO
@@ -518,8 +755,12 @@
             </div>
         </main>
 
-        <footer>
+        <footer style="text-align: center; margin-top: 50px; opacity: 0.8; font-size: 0.7rem; color: #aaa;">
             BOILER GUH © 2026
+            <br>
+            <small style="font-size: 0.6rem; opacity: 0.5;">
+                Fotos por <a href="https://unsplash.com/@cocktailbart" target="_blank" style="color: inherit; text-decoration: none;">Johann Trasch</a> e <a href="https://unsplash.com/@yesmorecontent" target="_blank" style="color: inherit; text-decoration: none;">YesMore Content</a> na Unsplash.
+            </small>
             
             <div class="social-row">
                 <a href="https://www.instagram.com/boiler_guh/" target="_blank">
@@ -528,6 +769,11 @@
                     </svg>
                 </a>
                 
+                <a href="https://facebook.com/SEUFACEBOOK" target="_blank">
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                </a>
             </div>
         </footer>
     </div>
@@ -540,6 +786,7 @@
     </nav>
 
     <script>
+        // Navegação de Abas
         function showPage(id, btn) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -548,47 +795,50 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
+        // Função para Abrir/Fechar Detalhes do Produto
+        function toggleDetails(header) {
+            const details = header.nextElementSibling;
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                header.classList.remove('active');
+            } else {
+                details.style.display = 'block';
+                header.classList.add('active');
+            }
+        }
+
+        // Compartilhar
         function shareMenu(e) {
             e.preventDefault();
             if (navigator.share) {
-                navigator.share({
-                    title: 'Boiler Guh Menu',
-                    text: 'Confira o cardápio oficial do Boiler Guh Sunset!',
-                    url: window.location.href
-                })
-                .catch(console.error);
+                navigator.share({ title: 'Boiler Guh Menu', url: window.location.href }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert("Link copiado para a área de transferência!");
+                alert("Link copiado!");
             }
         }
-    </script>
-    <script>
+
+        // Mudança de Cor por Horário
         function updateAtmosphere() {
             const now = new Date();
             const hour = now.getHours(); 
             const root = document.documentElement;
-
-            // 1. SUNSET (16:00 às 18:00) - "Black Sunset"
+            // Sunset 16h-18h
             if (hour >= 16 && hour < 18) {
                 root.style.setProperty('--night', '#050505');       
                 root.style.setProperty('--dark-purple', '#1a0f0f'); 
                 root.style.setProperty('--accent', '#ff9f43');      
-                console.log("Modo: Black Sunset 🌅");
             } 
-            // 2. TWILIGHT (18:00 às 19:00) - "Deep Navy"
+            // Twilight 18h-19h
             else if (hour >= 18 && hour < 19) {
                 root.style.setProperty('--night', '#02040a');       
                 root.style.setProperty('--dark-purple', '#0f172a'); 
                 root.style.setProperty('--accent', '#ff6b6b');      
-                console.log("Modo: Twilight Navy 🌆");
             } 
-            // 3. NIGHT (Padrão)
             else {
                 root.style.removeProperty('--night');
                 root.style.removeProperty('--dark-purple');
                 root.style.removeProperty('--accent');
-                console.log("Modo: Night Party 🌙");
             }
         }
         updateAtmosphere();
